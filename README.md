@@ -2,32 +2,45 @@
 
 ## Deploy
 
-To deploy the project use commands: <br>
-### docker-compose build <br> docker-compose up 
+To deploy the project use commands:
+
+### docker-compose build <br> docker-compose up
 
 ## Add review
 
-You can post a review in a such way: <br>
+With a link `http://127.0.0.1:8000/review/` you can post a review in a such way: <br>
 `{
-"shop_link": "https://rozetka.com.ua/tovary-dlia-koshek/", 
-"user": "lana@gmail.com", 
-"title": "good shop",
-"description": "some text",
-"rating": 4 
+    "shop_link": "https://rozetka.com.ua/tovary-dlia-koshek/",
+    "user": "lana@gmail.com",
+    "title": "good shop",
+    "description": "some text",
+    "rating": 4 
+}`
+Also here you can filter data by fields `user` or `shop_link` in a such way: `http://127.0.0.1:8000/review/?search=lana`
+and you will receive all lana's reviews.
+
+## Update review
+
+For an update a review you have to add an ID of a review into URL, as an example:
+`http://127.0.0.1:8000/review/1` and then you can update any data of this review by using PUT or PATCH HTTP Methods.
+Example of an update data:
+`{
+"rating": 1 
 }`
 
-## Update or Delete review
+## Delete review
 
-For an update or delete a review you have to add an ID of a review into URL, as an example:
-`http://127.0.0.1:8000/review/1` and then you can update any data of this review or delete it.
+To delete a review use the same link as for an update.
 
 ## Shop list
 
 Using a link like: `http://127.0.0.1:8000/shop/` you can get a shop list and order them by:
-1. Domain - ascending/descending
-2. Reviews - ascending/descending
-3. Rating - ascending/descending
+
+1. Domain - ascending/descending    `http://127.0.0.1:8000/shop/?ordering=domain` or `-domain`
+2. Reviews - ascending/descending   `http://127.0.0.1:8000/shop/?ordering=reviews` or `-reviews`
+3. Rating - ascending/descending    `http://127.0.0.1:8000/shop/?ordering=avg_rate` or `-avg_rate`
 
 ## Group by user
 
-Using a link `http://127.0.0.1:8000/group_by_user/` we are getting a list of reviews grouped by user email and ordered by created time
+Using a link `http://127.0.0.1:8000/group_by_user/` we are getting a list of reviews grouped by user email and ordered
+by created time.
