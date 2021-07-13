@@ -14,4 +14,4 @@ class Review(models.Model):
 class Shop(models.Model):
     domain = models.CharField(max_length=50, unique=True)
     reviews = models.PositiveIntegerField(default=0)
-    avg_rate = models.PositiveIntegerField(default=0)
+    avg_rate = models.FloatField(default=0)
