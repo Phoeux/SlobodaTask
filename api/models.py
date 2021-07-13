@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 
 class Review(models.Model):
@@ -7,3 +8,4 @@ class Review(models.Model):
     title = models.CharField(max_length=50)
     description = models.TextField()
     rating = models.SmallIntegerField()
+    creation_time = models.DateTimeField(default=timezone.now)
