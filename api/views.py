@@ -1,4 +1,3 @@
-from django.db.models import F, Avg
 from rest_framework import viewsets, status
 from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.response import Response
@@ -6,6 +5,7 @@ from urllib.parse import urlparse
 
 from api.models import Review, Shop
 from api.serializers import ReviewSerializer, ShopSerializer
+from api.utils import get_shop
 
 
 class ReviewModelViewSet(viewsets.ModelViewSet):
@@ -20,13 +20,31 @@ class ReviewModelViewSet(viewsets.ModelViewSet):
         self.perform_create(serializer)
 
         domain = urlparse(self.request.data['shop_link']).netloc
-        shop, _ = Shop.objects.get_or_create(domain=domain)
-        shop.reviews = F('reviews') + 1
-        shop.avg_rate = Review.objects.filter(shop_link__contains=shop.domain).aggregate(Avg('rating'))['rating__avg']
-        shop.save()
+        get_shop(self, domain)
 
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+
+    def update(self, request, *args, **kwargs):
+        partial = kwargs.pop('partial', False)
+        instance = self.get_object()
+        serializer = self.get_serializer(instance, data=request.data, partial=partial)
+        serializer.is_valid(raise_exception=True)
+        self.perform_update(serializer)
+
+        domain = urlparse(serializer.data['shop_link']).netloc
+        get_shop(self, domain)
+
+        return Response(serializer.data)
+
+    def destroy(self, request, *args, **kwargs):
+        instance = self.get_object()
+
+        domain = urlparse(instance.shop_link).netloc
+        get_shop(self, domain)
+
+        self.perform_destroy(instance)
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 class GroupByUser(viewsets.ReadOnlyModelViewSet):
