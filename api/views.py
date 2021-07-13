@@ -1,4 +1,4 @@
-from django.db.models import F
+from django.db.models import F, Avg
 from rest_framework import viewsets, status
 from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.response import Response
@@ -22,6 +22,7 @@ class ReviewModelViewSet(viewsets.ModelViewSet):
         domain = urlparse(self.request.data['shop_link']).netloc
         shop, _ = Shop.objects.get_or_create(domain=domain)
         shop.reviews = F('reviews') + 1
+        shop.avg_rate = Review.objects.filter(shop_link__contains=shop.domain).aggregate(Avg('rating'))['rating__avg']
         shop.save()
 
         headers = self.get_success_headers(serializer.data)

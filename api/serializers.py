@@ -16,12 +16,8 @@ class ReviewSerializer(serializers.ModelSerializer):
 
 class ShopSerializer(serializers.ModelSerializer):
     domain = serializers.CharField(read_only=True)
-    avg_rate = serializers.SerializerMethodField()
 
     class Meta:
         model = Shop
         fields = ['domain', 'reviews', 'avg_rate']
 
-    def get_avg_rate(self, data):
-        data.avg_rate = Review.objects.filter(shop_link__contains=data.domain).aggregate(Avg('rating'))['rating__avg']
-        return data.avg_rate
