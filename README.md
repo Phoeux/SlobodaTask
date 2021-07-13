@@ -3,7 +3,7 @@
 ## Deploy
 
 To deploy the project use commands: <br>
-### docker-compose build <br> docker-compose up
+### docker-compose build <br> docker-compose up 
 
 ## Add review
 
