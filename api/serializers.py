@@ -1,5 +1,4 @@
 from django.core.validators import MinValueValidator, MaxValueValidator
-from django.db.models import Avg
 from rest_framework import serializers
 
 from api.models import Review, Shop
