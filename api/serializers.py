@@ -19,4 +19,3 @@ class ShopSerializer(serializers.ModelSerializer):
     class Meta:
         model = Shop
         fields = ['domain', 'reviews', 'avg_rate']
-

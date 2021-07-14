@@ -49,7 +49,8 @@ class TestAPI(APITestCase):
         self.assertEqual(Review.objects.filter(user='lana@gmail.com').count(), 2)
         self.assertEqual(Shop.objects.count(), 2)
         """Update of a review"""
-        url_detail = reverse('api:review-detail', kwargs={'pk': Review.objects.get(title=data_first_review['title']).pk})
+        url_detail = reverse('api:review-detail',
+                             kwargs={'pk': Review.objects.get(title=data_first_review['title']).pk})
         data_part_upd = {
             'rating': 5
         }
