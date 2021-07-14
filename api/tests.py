@@ -6,9 +6,6 @@ from api.models import Review, Shop
 
 
 class TestAPI(APITestCase):
-    def setUp(self) -> None:
-        pass
-
     def test_review_CRUD(self):
         url = reverse('api:review-list')
         data_first_review = {

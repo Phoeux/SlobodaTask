@@ -16,7 +16,7 @@ With a link `http://127.0.0.1:8000/review/` you can post a review in a such way:
     "description": "some text",
     "rating": 4 
 }`
-Also here you can filter data by fields `user` or `shop_link` in a such way: `http://127.0.0.1:8000/review/?search=lana`
+and here you can filter data by fields `user` or `shop_link` in a such way: `http://127.0.0.1:8000/review/?search=lana`
 and you will receive all lana's reviews.
 
 ## Update review
@@ -30,7 +30,7 @@ Example of an update data:
 
 ## Delete review
 
-To delete a review use the same link as for an update.
+To delete a review use the same link as for an update by using DELETE HTTP Method.
 
 ## Shop list
 
@@ -42,5 +42,5 @@ Using a link like: `http://127.0.0.1:8000/shop/` you can get a shop list and ord
 
 ## Group by user
 
-Using a link `http://127.0.0.1:8000/group_by_user/` we are getting a list of reviews grouped by user email and ordered
+Using the link `http://127.0.0.1:8000/group_by_user/` we are getting a list of reviews grouped by user email and ordered
 by created time.
