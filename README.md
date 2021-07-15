@@ -42,3 +42,8 @@ Using a link like: `http://127.0.0.1:8000/shop/` you can get a shop list and ord
 
 Using the link `http://127.0.0.1:8000/group_by_user/` we are getting a list of reviews grouped by user email and ordered
 by created time.
+
+## Swagger
+
+A good feature is Swagger, that helps a lot in working with API. You can get it from a
+link `http://127.0.0.1:8000/swagger-ui/`
